@@ -33,6 +33,7 @@ Choosely
   > Help groups come to concensus on what activity to do (what movie to see, what restaurant to go to, etc.)
 
 ## Problem ##
+  > Everyone is indecisive and it takes a long time to make a decision.
   > No one voices their opinion when gathered in a group.
     > You therefore never know how people feel about any particular option.
   > Way to make sure all participants opinions are heard/weighed.
