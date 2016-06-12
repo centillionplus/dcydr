@@ -46,6 +46,13 @@ When writing any block of code that is logically subordinate to the line immedia
 
 
 ### Variable names
+* For a complete guide on naming conventions, [look here in a-nickle's worth blog](https://a-nickels-worth.blogspot.com/2016/04/a-guide-to-naming-variables.html?m=1). The general rules below should be followed:
+
+* The goal of variable names to is to help people understand the intent of the code.  Naming an element, "el" or "element" does not convey the intent behind the particular element's role. Err on the side of intent, and away from what the variable is (iterator, value, etc).  
+
+* Overly descriptive variable names are taxing to read.
+
+* Aim for listing all variables at the top of the scope.  
 
 * A single descriptive word is best.
 
