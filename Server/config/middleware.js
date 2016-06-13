@@ -1,6 +1,6 @@
 var routes = require('./routes.js');
-var bodyParser  = require('body-parser');
-var ref = require('../server.js').ref;
+var bodyParser = require('body-parser');
+
 
 
 
@@ -14,3 +14,4 @@ module.exports = function (app, express) {
 
   //serve index
   app.use(express.static(__dirname + '/../../public'));
+};
