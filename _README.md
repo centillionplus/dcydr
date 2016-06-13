@@ -46,9 +46,6 @@ From within the root directory:
 npm install
 ```
 
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
 ## Feature List
 
