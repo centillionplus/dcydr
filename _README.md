@@ -114,6 +114,20 @@ You can see the sketch of our client and server (and how they interact with each
 https://drive.google.com/file/d/0ByfR6UjPYbmhaS02R01OZEVsLW8/view?usp=sharing
 
 
+### User Views
+
+You can see the UX/UI sketches of views 1, 2, and 3 here:
+https://drive.google.com/file/d/0ByfR6UjPYbmhSTcweVJaNjRwcWs/view?usp=sharing
+
+- NOTE: The numbers indicated by each UI component reference the numbers listed in the Architecture sketch, listed below.
+
+
+### Architecture
+
+You can see the sketch of our client and server (and how they interact with each other) here:
+https://drive.google.com/file/d/0ByfR6UjPYbmhaS02R01OZEVsLW8/view?usp=sharing
+
+
 ## Contributing
 
 See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
