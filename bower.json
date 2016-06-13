@@ -1,0 +1,23 @@
+{
+  "name": "centillionplus",
+  "homepage": "https://github.com/centillionplus",
+  "authors": [
+    "Ruth",
+    "Mario",
+    "Joel"
+  ],
+
+  "description": "YourVoteCounts",
+  "main": "app.js",
+  "keywords": [
+    "dcydr"
+  ],
+
+  "license": "ISC",
+
+  "dependencies": {
+      "bootstrap": "latest",
+      "angular": "latest",
+      "angular-route": "latest"   
+  }
+}
