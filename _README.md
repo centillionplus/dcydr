@@ -46,6 +46,58 @@ bower install
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
+## Feature List
+
+  UI Features:
+
+    -All Views
+      -Name of App - Header
+
+    -View 1
+      - Voting instruction - “How many  people need to vote”
+      -Counter - Keep track of number of voters
+        -Decrementer
+        -Incrementer
+        -Display Current Count
+      -Go Button - Start Voting - Route to next view if already on the site, defaults View 2 to newcomers
+        -post # of voters
+
+
+    -View 2
+      -Yes Button 
+    -Counts a Yes Vote
+      - post vote
+      -Some feedback - highlight button, message, something
+    -No Button
+      -Counts a No Vote
+      - post vote
+    -Some feedback - highlight button, message, something
+    -Cancel Button or Text
+      -ask for confirmation(confirm)
+      -Route back to View 1
+      -Only for original User(optional)
+      -Scraps votes
+      - post cancel
+
+    -View 3
+      -”The group votes:” show result of vote (Yes, No, Tie)
+      -Done Button - goes back to View 1 after confirmation(confirm)
+        - post done
+
+  Server:
+  
+    -serve static files: html, css, any assets
+    -Keep track of votes - 
+    -Know number of voters
+    -Calculate results
+    -handle get and post
+      - respond to get with state (view 1, view 2, view 3) and results when ready
+      - respond to get with # voters (optional)
+      - respond to post vote 301
+        - tally vote
+      - respond to post  cancel / done
+        -scrap votes
+
 
 ## Contributing
 
