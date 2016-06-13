@@ -1,0 +1,24 @@
+{
+  "name": "dcydr",
+  "version": "1.0.0",
+  "description": "voting app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centillionplus/centillionplus.git"
+  },
+  "author": "Mario, Ruth, Joel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/centillionplus/centillionplus/issues"
+  },
+  "homepage": "https://github.com/centillionplus/centillionplus#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4"
+  }
+}
