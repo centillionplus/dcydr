@@ -2,12 +2,12 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
   $routeProvider
 
-  // home page
+  // index page - Header with view1
   .when('/', {
     templateUrl: 'views/index.html',
     controller: 'MainController'
   })
-
+  
   .when('/view1', {
     templateUrl: 'views/view1.html',
     controller: 'MainController'
