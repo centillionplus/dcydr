@@ -2,16 +2,18 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
 
   //set number of voters to a default of 3.  
   $scope.voters = 3;
+  // $scope.userVoteYes = null;
+  // $scope.userVoteNo = null;
 
   //Possible voter object:
-  var dcydrObj = { 
-    voters: $scope.voters,
-    stateView: view1,
-    yes: 0,
-    no: 0,
-    totalVotes: 3,
-    allVotesIn: false
-  };
+  // var dcydrObj = { 
+  //   voters: $scope.voters,
+  //   stateView: view1,
+  //   yes: 0,
+  //   no: 0,
+  //   totalVotes: 3,
+  //   allVotesIn: false
+  // };
 
   //---General functionality for listening to stateView and resetting stateView------
 
@@ -26,7 +28,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
         'stateView': state.data.state,
         'yes': state.data.yes,
         'no': state.data.no,
-        'totalVotes': tate.data.totalVotes,
+        'totalVotes': state.data.totalVotes,
         'allVotesIn': state.data.allVotesIn
       };
     });
@@ -38,7 +40,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
   beginApp();
 
 
-  //Reset stateView
+  //Reset stateView - visible on views 2a - 3
   $scope.reset = function() {
     //Confirm pop-up
     var confirmReset = confirm('Are you sure you want to reset?');
@@ -62,7 +64,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
   };
 
 
-  //---view1------------------------------------------------------
+//---view1-------------------------------------------------------
 
   //When '+' is clicked on view1, $scope.voters is changed accordingly  
   $scope.incNumOfVoters = function() {
@@ -90,7 +92,24 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
 
 //---view2a------------------------------------------------------
 
+  //Take user vote input and post to server - called when user clicks Y/N on view2a.html
+  $scope.postVoteYes = function() {
+    Main.addVoteYes().
+      catch(function (err) {
+        console.log(err);
+      });
+  };
 
+  $scope.postVoteNo = function() {
+    Main.addVoteNo().
+      catch(function (err) {
+        console.log(err);
+      });
+  };
+
+//---view2b------------------------------------------------------
+
+//---view3-------------------------------------------------------
 
 
 
