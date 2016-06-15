@@ -1,9 +1,8 @@
 angular.module('MainCtrl', [])
-.controller('MainController', function($scope, Main, $interval) {
+.controller('MainController', function($scope, Main, $interval, $location) {
 
   // Possible voter object:
   var dcydrObj = { 
-    voters: $scope.voters,
     stateView: 1,
     yes: 0,
     no: 0,
@@ -15,7 +14,7 @@ angular.module('MainCtrl', [])
   //Set number of voters to a default of 3.  
   $scope.voters = 3;
   //For displaying result on view3
-  $scope.result = dcydrObj.result;
+  // $scope.result = dcydrObj.result;
   //For display on view2b
   $scope.userVote = null;
 
@@ -27,8 +26,7 @@ angular.module('MainCtrl', [])
       // $scope.data = dataResponse;
     }).then(function(state) {
       dcydrObj = {
-        'voters': state.data.voters,
-        'stateView': state.data.state,
+        'stateView': state.data.stateView,
         'yes': state.data.yes,
         'no': state.data.no,
         'totalVotes': state.data.totalVotes,
@@ -36,18 +34,30 @@ angular.module('MainCtrl', [])
         'result': state.data.result
       };
     });
-    //Check if results are in.  If so, change to view3
-    if (state.data.result !== null) {
-      //switch to view 3. (This method has not been tested.)
-      $location.path('/views/view3'); 
+    console.log('TEST IN LISTENER: ', dcydrObj);
+    //If stateView is 2 AND userVote is null
+    if (dcydrObj.stateView === 2 && $scope.userVote === null) {
+      //Change path to view2a
+      $location.path('/view2a'); 
+    //If stateView is 2
+    } else if (dcydrObj.stateView === 2 && $scope.userVote !== null) {
+      //Change path to 2b
+      $location.path('/view2b');
+    }
+    //If allVotesIn is true
+    if (dcydrObj.result) {
+      //make $scope.result show the result
+      $scope.result = dcydrObj.result;
+      //Change view to 3
+      $location.path('/view3'); 
     }
   };
 
-
-  //Call listenToServer on a setInterval of 500ms.  
-  // var beginApp = $interval(listenToServer, 500);
-
-  // beginApp();
+//++++++ This begins the listening cycle ++++++++++++++++++++++++
+//++++++ Un-comment to turn on ++++++++++++++++++++++++++++++++++
+//++++++ Call listenToServer on a setInterval of 500ms. +++++++++
+  $interval(listenToServer, 1000);
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
   //Reset stateView - visible on views 2a - 3
@@ -70,6 +80,8 @@ angular.module('MainCtrl', [])
       Main.resetState(function() {
         
       });
+      //Reset view to view1
+      $location.path('/views/view1');
     }
   };
 
@@ -93,9 +105,9 @@ angular.module('MainCtrl', [])
   };
 
   //Initiated when user hits 'go'.  take in number of votes from view1.  
-  //Go button has href to view 2a?
+  //Once one user hits go, all users views will switch to v2a.  That is handled in listenToServer
   $scope.go = function() {
-    Main.startVoting({'voters': $scope.voters}).
+    Main.startVoting({'votes': $scope.voters}).
       catch(function (err) {
         console.log(err);
       });
