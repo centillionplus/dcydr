@@ -65,21 +65,21 @@ module.exports = {
   //reset the vote session
   voteReset: function () {
 
-    this.stateView: 1,
+    this.stateView = 1;
 
     //# of yes votes
-    this.yes: 0,
+    this.yes = 0;
 
     //# of no votes
-    this.no: 0,
+    this.no = 0;
 
     //total votes expected
-    this.totalVotes: 3,
+    this.totalVotes = 3;
 
     //tracks when all votes are in
-    this.allVotesIn: false,
+    this.allVotesIn = false;
 
     //result of voting session: strings 'yes','no',or 'tie'
-    this.result: null,
+    this.result = null;
   }
 };

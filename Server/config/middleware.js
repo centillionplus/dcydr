@@ -20,5 +20,5 @@ module.exports = function (app, express) {
   routes(voteRouter);
 
   //use router for all vote requests
-  app.use('/api/votes');
+  app.use('/api/votes', voteRouter);
 };
