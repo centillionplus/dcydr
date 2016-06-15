@@ -40,7 +40,8 @@ angular.module('MainCtrl', [])
       //Change path to view2a
       $location.path('/view2a'); 
     //If stateView is 2
-    } else if (dcydrObj.stateView === 2 && $scope.userVote !== null) {
+    } else if (dcydrObj.stateView === 2) { //for testing..
+    // } else if (dcydrObj.stateView === 2 && $scope.userVote !== null) {
       //Change path to 2b
       $location.path('/view2b');
     }
@@ -81,7 +82,7 @@ angular.module('MainCtrl', [])
         
       });
       //Reset view to view1
-      $location.path('/views/view1');
+      $location.path('/view1');
     }
   };
 
