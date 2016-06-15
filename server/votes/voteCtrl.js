@@ -44,20 +44,20 @@ module.exports = {
       //check for a winner
       if (this.yes > this.no) {
         //set result
-        result = 'yes';
+        this.result = 'yes';
       } else if (this.yes < this.no) {
         //set result
-        result = 'no';
+        this.result = 'no';
       } else {
         //set result
-        result = 'tie';
+        this.result = 'tie';
       }
     }
   },
 
   setTotalVotes: function (num) {
     //set votes total
-    this.totalVotes = num;
+    this.totalVotes = num || 3;
     //set state to 2
     this.state = 2;
   },
