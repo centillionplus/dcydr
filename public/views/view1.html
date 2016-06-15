@@ -1,5 +1,11 @@
 <div ng-controller="MainController">
-  <button ng-click="decNumOfVoters()">-</button>
-  <div>{{ voters }}</div>
-  <button ng-click="incNumOfVoters()">+</button>
+
+  <div id="counter">
+    <button ng-click="decNumOfVoters()">-</button>
+    <div>{{ voters }}</div>
+    <button ng-click="incNumOfVoters()">+</button>
+  </div>
+
+  <button ng-click="go()">Let's Start Voting!</button>
+  
 </div>
