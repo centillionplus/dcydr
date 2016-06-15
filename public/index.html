@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html \>
+<html>
   <head>
     <meta charset="utf-8" />
     <title>DCYDR</title>
-    <!-- <link rel="stylesheet" type="text/css" href="styles/style.css" /> -->
-   
-
-
-    
-
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
-  <body>
-  <h1>DCYDR</h1>
+  <body ng-app="dcydr">
+    <h1>DCYDR</h1>
+    <div ng-view></div>
+    
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-route/angular-route.js"></script>
+
+    <script src="MainCtrl.js" type="text/javascript"></script>
+    <script src="MainService.js" type="text/javascript"></script>
+    <script src="appRoutes.js" type="text/javascript"></script>
+    <script src="app.js" type="text/javascript"></script>
+
   </body>
+</html>

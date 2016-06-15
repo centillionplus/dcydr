@@ -1,1 +1,6 @@
-angular.module('dcydr', ['ngRoute', 'appRoutes', 'MainCtrl', 'MainService']);
+angular.module('dcydr', [
+  'ngRoute',
+  'appRoutes',
+  'MainCtrl',
+  'MainService'
+]);
