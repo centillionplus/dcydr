@@ -1,4 +1,5 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, Main, $interval) {
+angular.module('MainCtrl', [])
+.controller('MainController', function($scope, Main, $interval) {
 
   // Possible voter object:
   var dcydrObj = { 
@@ -44,9 +45,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
 
 
   //Call listenToServer on a setInterval of 500ms.  
-  var beginApp = $interval(listenToServer, 500);
+  // var beginApp = $interval(listenToServer, 500);
 
-  beginApp();
+  // beginApp();
 
 
   //Reset stateView - visible on views 2a - 3

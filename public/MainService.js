@@ -1,4 +1,5 @@
-angular.module('MainService', []).factory('Main', ['$http', function($http) {
+angular.module('MainService', [])
+.factory('Main', ['$http', function($http) {
 
   return {
     //call to get state - on setInterval?
