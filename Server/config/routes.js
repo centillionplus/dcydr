@@ -8,6 +8,14 @@ module.exports = function(app) {
     //get voting session obj
     .get(function(req, res) {
       res.send(voteSession);
+    })
+    //set totalVotes
+    .post(function(req, res) {
+      console.log(req.body);
+      //parse number of voters
+      var voters = parseInt(req.body.votes);
+      voteSession.setTotalVotes(voters);
+      res.send(201, voteSession);
     });
 
   app.route('/yes')
@@ -28,16 +36,6 @@ module.exports = function(app) {
     //handle reset/cancel request
     .post(function(req, res) {
       voteSession.voteReset();
-      res.send(201, voteSession);
-    });
-
-  app.route('/setVoters')
-    //set totalVotes
-    .post(function(req, res) {
-      console.log(req.body);
-      //parse number of voters
-      var voters = parseInt(req.body.votes);
-      voteSession.setTotalVotes(voters);
       res.send(201, voteSession);
     });
 };
