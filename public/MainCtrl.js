@@ -133,5 +133,4 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
   //Only the reset function/button is available on view3
 
 
-
 });
