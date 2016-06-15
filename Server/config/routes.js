@@ -1,13 +1,21 @@
-
+var http = require('');
 
 module.exports = function(app) {
 
-  //list routes
+  //main vote route 
   app.route('/')
-    //get 
-    .get()
+    //get voting session obj
+    .get();
 
-    //post
+  app.route('/yes')
+    //handle yes vote
     .post();
 
+  app.route('/no')
+    //handle no vote
+    .post();
+
+  app.route('/reset')
+    //handle reset/cancel request
+    .post();
 };
