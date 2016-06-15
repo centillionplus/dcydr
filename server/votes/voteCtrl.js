@@ -40,7 +40,7 @@ module.exports = {
       //all votes are in!
       this.allVotesIn = true;
       //change to state 3
-      this.state = 3;
+      this.stateView = 3;
       //check for a winner
       if (this.yes > this.no) {
         //set result
@@ -59,7 +59,7 @@ module.exports = {
     //set votes total
     this.totalVotes = num || 3;
     //set state to 2
-    this.state = 2;
+    this.stateView = 2;
   },
 
   //reset the vote session
