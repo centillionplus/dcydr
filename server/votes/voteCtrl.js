@@ -40,7 +40,7 @@ module.exports = {
       //all votes are in!
       this.allVotesIn = true;
       //change to state 3
-      this.state = 3;
+      this.stateView = 3;
       //check for a winner
       if (this.yes > this.no) {
         //set result
