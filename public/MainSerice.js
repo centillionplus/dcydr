@@ -11,16 +11,16 @@ angular.module('MainService', []).factory('Main', ['$http', function($http) {
       return $http.post('/api/vote', voterData);
     },
 
-    //sends a Yes or No vote
+    //sends a Yes vote
     addVoteYes: function(vote) {
       return $http({
         method: 'POST',
-        url: '/api/vote/yes',  //vote/yes or 
+        url: '/api/vote/yes',
         data: vote
       });
     },
 
-    //sends a Yes or No vote
+    //sends a No vote
     addVoteNo: function(vote) {
       return $http({
         method: 'POST',
@@ -31,9 +31,9 @@ angular.module('MainService', []).factory('Main', ['$http', function($http) {
 
 
     //Cancel/Reset - not sure if this sends an actual reset vote object, or a message for server to reset the object
-    resetState: function(resetData) {
+    resetState: function() {
       //returns a reset voteData object
-      return $http.post('/api/vote', resetData);
+      return $http.post('api/vote/reset/');
     },
 
 

@@ -1,26 +1,28 @@
 angular.module('MainCtrl', []).controller('MainController', function($scope, Main, $interval) {
 
-  //set number of voters to a default of 3.  
-  $scope.voters = 3;
-  // $scope.userVoteYes = null;
-  // $scope.userVoteNo = null;
+  // Possible voter object:
+  var dcydrObj = { 
+    voters: $scope.voters,
+    stateView: 1,
+    yes: 0,
+    no: 0,
+    totalVotes: 3,
+    allVotesIn: false,
+    result: null
+  };
 
-  //Possible voter object:
-  // var dcydrObj = { 
-  //   voters: $scope.voters,
-  //   stateView: view1,
-  //   yes: 0,
-  //   no: 0,
-  //   totalVotes: 3,
-  //   allVotesIn: false
-  // };
+  //Set number of voters to a default of 3.  
+  $scope.voters = 3;
+  //For displaying result on view3
+  $scope.result = dcydrObj.result;
+  //For display on view2b
+  $scope.userVote = null;
 
   //---General functionality for listening to stateView and resetting stateView------
 
-
   //Listen to any server side changes and update dcydrObj accorgingly
   var listenToServer = function() {
-    Main.getState(function(dataResponse) {
+    Main.getState(function() {
       // $scope.data = dataResponse;
     }).then(function(state) {
       dcydrObj = {
@@ -29,10 +31,17 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
         'yes': state.data.yes,
         'no': state.data.no,
         'totalVotes': state.data.totalVotes,
-        'allVotesIn': state.data.allVotesIn
+        'allVotesIn': state.data.allVotesIn,
+        'result': state.data.result
       };
     });
+    //Check if results are in.  If so, change to view3
+    if (state.data.result !== null) {
+      //switch to view 3. (This method has not been tested.)
+      $location.path('/views/view3'); 
+    }
   };
+
 
   //Call listenToServer on a setInterval of 500ms.  
   var beginApp = $interval(listenToServer, 500);
@@ -83,6 +92,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
   };
 
   //Initiated when user hits 'go'.  take in number of votes from view1.  
+  //Go button has href to view 2a?
   $scope.go = function() {
     Main.startVoting({'voters': $scope.voters}).
       catch(function (err) {
@@ -93,7 +103,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
 //---view2a------------------------------------------------------
 
   //Take user vote input and post to server - called when user clicks Y/N on view2a.html
+  //Clicking Y or N has href to view 2b?
   $scope.postVoteYes = function() {
+    $scope.userVote = 'yes';
     Main.addVoteYes().
       catch(function (err) {
         console.log(err);
@@ -101,6 +113,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
   };
 
   $scope.postVoteNo = function() {
+    $scope.userVote = 'no';
     Main.addVoteNo().
       catch(function (err) {
         console.log(err);
@@ -109,9 +122,15 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, Mai
 
 //---view2b------------------------------------------------------
 
+  //$scope.userVote should be set in view2a to Yes or No. 
+
+  //Listener for server for result is in listenToServer function.  When result comes in, view changes to view3
+
+
 //---view3-------------------------------------------------------
 
-
+  //show $scope.result (var listed above)
+  //Only the reset function/button is available on view3
 
 
 
