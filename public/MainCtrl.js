@@ -2,7 +2,7 @@ angular.module('MainCtrl', [])
 .controller('MainController', function($scope, Main, $interval, $location) {
 
   // Possible voter object:
-  var dcydrObj = { 
+  $scope.dcydrObj = { 
     stateView: 1,
     yes: 0,
     no: 0,
@@ -14,18 +14,17 @@ angular.module('MainCtrl', [])
   //Set number of voters to a default of 3.  
   $scope.voters = 3;
   //For displaying result on view3
-  // $scope.result = dcydrObj.result;
+  // $scope.result = $scope.dcydrObj.result;
   //For display on view2b
   $scope.userVote = null;
 
   //---General functionality for listening to stateView and resetting stateView------
 
-  //Listen to any server side changes and update dcydrObj accorgingly
-  var listenToServer = function() {
-    Main.getState(function() {
-      // $scope.data = dataResponse;
-    }).then(function(state) {
-      dcydrObj = {
+  //Listen to any server side changes and update $scope.dcydrObj accorgingly
+  $scope.listenToServer = function() {
+    Main.getState()
+    .then(function(state) {
+      $scope.dcydrObj = {
         'stateView': state.data.stateView,
         'yes': state.data.yes,
         'no': state.data.no,
@@ -34,21 +33,21 @@ angular.module('MainCtrl', [])
         'result': state.data.result
       };
     });
-    console.log('TEST IN LISTENER: ', dcydrObj);
+    console.log('TEST IN LISTENER: ', $scope.dcydrObj);
     //If stateView is 2 AND userVote is null
-    if (dcydrObj.stateView === 2 && $scope.userVote === null) {
+    if ($scope.dcydrObj.stateView === 2 && $scope.userVote === null) {
       //Change path to view2a
       $location.path('/view2a'); 
     //If stateView is 2
-    } else if (dcydrObj.stateView === 2) { //for testing..
-    // } else if (dcydrObj.stateView === 2 && $scope.userVote !== null) {
+    } else if ($scope.dcydrObj.stateView === 2) { //for testing..
+    // } else if ($scope.dcydrObj.stateView === 2 && $scope.userVote !== null) {
       //Change path to 2b
       $location.path('/view2b');
     }
     //If allVotesIn is true
-    if (dcydrObj.result) {
+    if ($scope.dcydrObj.result) {
       //make $scope.result show the result
-      $scope.result = dcydrObj.result;
+      $scope.result = $scope.dcydrObj.result;
       //Change view to 3
       $location.path('/view3'); 
     }
@@ -56,20 +55,19 @@ angular.module('MainCtrl', [])
 
 //++++++ This begins the listening cycle ++++++++++++++++++++++++
 //++++++ Un-comment to turn on ++++++++++++++++++++++++++++++++++
-//++++++ Call listenToServer on a setInterval of 500ms. +++++++++
-  $interval(listenToServer, 1000);
+//++++++ Call $scope.listenToServer on a setInterval of 500ms. +++++++++
+  $interval($scope.listenToServer, 1000);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
   //Reset stateView - visible on views 2a - 3
   $scope.reset = function() {
     //Confirm pop-up
-    var confirmReset = confirm('Are you sure you want to reset?');
-    if (confirmReset) {
+    if (confirm('Are you sure you want to reset?')) {
       //Reset number of voters to 3 (default)
       $scope.voters = 3;
       //Reset dcydr object to 
-      dcydrObj = { 
+      $scope.dcydrObj = { 
         voters: $scope.voters,
         stateView: 1,
         yes: 0,
@@ -78,11 +76,10 @@ angular.module('MainCtrl', [])
         allVotesIn: false
       };
       //API call to reset state on server
-      Main.resetState(function() {
-        
-      });
-      //Reset view to view1
-      $location.path('/view1');
+      Main.resetState()
+      .then(
+        //Reset view to view1
+        $location.path('/view1'));
     }
   };
 
@@ -106,7 +103,7 @@ angular.module('MainCtrl', [])
   };
 
   //Initiated when user hits 'go'.  take in number of votes from view1.  
-  //Once one user hits go, all users views will switch to v2a.  That is handled in listenToServer
+  //Once one user hits go, all users views will switch to v2a.  That is handled in $scope.listenToServer
   $scope.go = function() {
     Main.startVoting({'votes': $scope.voters}).
       catch(function (err) {
@@ -138,7 +135,7 @@ angular.module('MainCtrl', [])
 
   //$scope.userVote should be set in view2a to Yes or No. 
 
-  //Listener for server for result is in listenToServer function.  When result comes in, view changes to view3
+  //Listener for server for result is in $scope.listenToServer function.  When result comes in, view changes to view3
 
 
 //---view3-------------------------------------------------------
