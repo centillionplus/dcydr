@@ -1,6 +1,30 @@
 angular.module('MainCtrl', [])
 .controller('MainController', function($scope, Main, $interval, $location, $timeout) {
 
+  $scope.viewToRouteConverter = {
+    2: function() {
+      $location.path('/view2a');
+    },
+    3: function() {
+      $location.path('/view3');
+    }
+  };
+  //Listen to any server side changes via the socket, and update $scope.dcydrObj accorgingly
+  Main.socket.on('news', function(data) {
+    console.log("data in socket.on(news) on CLIENT: ", data);
+    $scope.dcydrObj = {
+        'stateView': data.stateView,
+        'yes': data.yes,
+        'no': data.no,
+        'totalVotes': data.totalVotes,
+        'allVotesIn': data.allVotesIn,
+        'result': data.result
+      };
+    // change the route if appropriate
+    // viewToRouteConverter[data.stateView];
+  });
+
+
   // Possible voter object:
   $scope.dcydrObj = { 
     stateView: 1,
@@ -20,47 +44,6 @@ angular.module('MainCtrl', [])
   //---General functionality for listening to stateView and resetting stateView------
 
   //Listen to any server side changes and update $scope.dcydrObj accorgingly
-  $scope.listenToServer = function() {
-    Main.getState()
-    .then(function(state) {
-      $scope.dcydrObj = {
-        'stateView': state.data.stateView,
-        'yes': state.data.yes,
-        'no': state.data.no,
-        'totalVotes': state.data.totalVotes,
-        'allVotesIn': state.data.allVotesIn,
-        'result': state.data.result
-      };
-      console.log('TEST IN LISTENER: ', $scope.dcydrObj);
-      //If stateView is 2 AND userVote is null
-      if ($scope.dcydrObj.stateView === 2 && $scope.userVote === null) {
-        //Change path to view2a
-        $timeout.cancel($scope.timeout);
-        $location.path('/view2a');
-      //If stateView is 2
-      // } else if ($scope.dcydrObj.stateView === 2) { //for testing..
-      // // } else if ($scope.dcydrObj.stateView === 2 && $scope.userVote !== null) {
-      //   //Change path to 2b
-      //   $location.path('/view2b');
-      }
-      //If allVotesIn is true
-      if ($scope.dcydrObj.result) {
-        $timeout.cancel($scope.timeout);
-
-        //make $scope.result show the result
-        $scope.result = $scope.dcydrObj.result;
-        //Change view to 3
-        $location.path('/view3'); 
-      }
-      $scope.timeout = $timeout($scope.listenToServer, 1000);
-    });
-  };
-
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// // Client no longer needs to listen to the server, as the server communicates directly via sockets.
-// // Old way we were having client listen regularly for changes (un-comment to turn on):
-// $scope.timeout = $timeout($scope.listenToServer, 1000);
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
   //Reset stateView - visible on views 2a - 3

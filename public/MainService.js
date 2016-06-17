@@ -1,21 +1,19 @@
-var socket = io('http://localhost:3000');
-socket.on('news', function(data) {
-    console.log("data in socket.on(news) on CLIENT: ", data);
-    // socket.emit('changeState', { newestState: 'ruth' });
-  });
-
 angular.module('MainService', [])
 .factory('Main', ['$http', function($http) {
 
   return {
-    //call to get state - on setInterval?
+
+    // create the socket variable to be used to emit and listen in the controller
+    socket: io('http://localhost:3000'),
+
+    //call to get state
     getState: function() {
       return $http.get('/api/vote');
     },
 
     //used from view1, sends number of voters and starts the voting (sets vote to view2a)
     startVoting: function(voterData) {
-      socket.emit('changeState', { 'startVoting': 'ruth' });
+      this.socket.emit('changeState', { 'startVoting': 'ruth' });
       return $http.post('/api/vote', voterData);
     },
 
