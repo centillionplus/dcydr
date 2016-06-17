@@ -2,12 +2,8 @@ angular.module('MainCtrl', [])
 .controller('MainController', function($scope, Main, $interval, $location, $timeout) {
 
   $scope.viewToRouteConverter = {
-    2: function() {
-      $location.path('/view2a');
-    },
-    3: function() {
-      $location.path('/view3');
-    }
+    2: '/view2a',
+    3: '/view3'
   };
   //Listen to any server side changes via the socket, and update $scope.dcydrObj accorgingly
   Main.socket.on('news', function(data) {
@@ -21,7 +17,11 @@ angular.module('MainCtrl', [])
         'result': data.result
       };
     // change the route if appropriate
-    // viewToRouteConverter[data.stateView];
+    var rerouteTo = $scope.viewToRouteConverter[data.stateView];
+    console.log("rerouteTo: ", rerouteTo);
+    console.log("$location: ", $location);
+    $location.path(rerouteTo);
+    $scope.$apply();
   });
 
 

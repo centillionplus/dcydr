@@ -1,5 +1,7 @@
 // var http = require('./config/http.js');
 var voteSession = require('../votes/voteCtrl.js');
+// var voteCtrl = require('../votes/voteCtrl.js');
+// var voteSession = voteCtrl.dataObj;
 
 module.exports = function(app) {
 
