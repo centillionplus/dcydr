@@ -13,7 +13,6 @@ angular.module('MainService', [])
 
     //used from view1, sends number of voters and starts the voting (sets vote to view2a)
     startVoting: function(voterData) {
-      this.socket.emit('changeState', { 'startVoting': 'ruth' });
       return $http.post('/api/vote', voterData);
     },
 
