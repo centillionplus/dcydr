@@ -1,11 +1,11 @@
-<div>
+<div class="jumbotron text-center">
 
   <div id="counter">
-    <button ng-click="decNumOfVoters()">-</button>
-    <div>{{ voters }}</div>
-    <button ng-click="incNumOfVoters()">+</button>
+    <div class="minus" ng-click="decNumOfVoters()">-</div>
+    <div class="voters">{{ voters }}</div>
+    <div class="plus" ng-click="incNumOfVoters()">+</div>
   </div>
 
-  <button ng-click="go()">Let's Start Voting!</button>
+  <div class="go" ng-click="go()">Start!</div>
   
 </div>
