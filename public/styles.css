@@ -1,4 +1,59 @@
-body {
+/*body {
   margin: 0px auto;
   text-align: center;
+}*/
+
+h1 { 
+  text-align: center;
+  letter-spacing: 15px;
+  color: #00ff00;
+  text-transform: uppercase;
 }
+
+h3 { 
+  text-align: center;
+  color: #00ff00;
+}
+
+.voters {
+  text-align: center;
+  color: #00ff00;
+  font-size: 50px;
+}
+
+.minus {
+  text-align: center;
+  color: #00ff00;
+  font-size: 50px;
+  padding-bottom: 20px;
+  padding-top: -30px;
+}
+
+.plus {
+  text-align: center;
+  color: #00ff00;
+  font-size: 50px;
+  padding-top: 20px;
+}
+
+.go {
+  text-align: center;
+  color: #00ff00;
+  font-size: 50px;
+  padding-top: 20px;
+}
+
+.reset {
+  text-align: center;
+  font-style: italic;
+  color: #00ff00;
+  padding-top: 120px;
+  padding-bottom: 20px;
+}
+
+.space {
+  text-align: center;
+  font-style: italic;
+  color: #00ff00;
+  padding-top: 45px;
+  
