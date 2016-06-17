@@ -11,24 +11,15 @@ middleware(app, express);
 
 var PORT = 3000;
 
-// Save server as a variable in order to reuse the HTTP server created with express for socket.io
+// Save the HTTP server created with express as a variable in order to reuse for socket.io
 var server = app.listen(PORT);
 console.log('DCYDR listening' + PORT);
 
 // Create the socket variable by passing in the HTTP server we saved above
-// var io = socketio.listen(server);
 var io = socketio(server);
 
 
-
-// Set up the websocket
-// io.sockets.on('connection', function(socket) {
-io.on('connection', function(socket) {
-  // socket.emit('news', {hello: 'world'});
-  socket.on('changeState', function(data) {
-    console.log("data in socket.on(changeState) on SERVER: ", data);
-  });
-});
-
+// Note RMP: I don't think this exported app is actually used anywhere
 module.exports.app = app;
+// Export the socket so we can have it listen and emit elsewhere (used in voteCtrl):
 module.exports.io = io;

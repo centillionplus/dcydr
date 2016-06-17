@@ -19,7 +19,7 @@ angular.module('MainCtrl', [])
   //---General functionality for listening to stateView and redirecting upon changes------
   
   //Listen to any server-side stateView changes via the socket, and update $scope.dcydrObj accorgingly
-  Main.socket.on('news', function(data) {
+  Main.socket.on('stateViewChange', function(data) {
     // Update the voter object to reflect the new data
     $scope.dcydrObj = data;
     // Change the route as appropriate
@@ -89,7 +89,8 @@ angular.module('MainCtrl', [])
   };
 
   //Initiated when user hits 'go'.  take in number of votes from view1.  
-  //Once one user hits go, all users views will switch to v2a.  That is handled via sockets
+  // Sends POST request to update the server
+  // (causes all users views will switch to v2a, handled via sockets)
   $scope.go = function() {
     Main.startVoting({'votes': $scope.voters}).
       catch(function (err) {

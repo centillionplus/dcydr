@@ -1,10 +1,7 @@
-var io = require('../server.js');
+var server = require('../server.js');
 
 //this contains and modifies the vote session obj
 module.exports = {
-
-  // dataObj: {
-
     
   //current view
   stateView: 1,
@@ -24,7 +21,7 @@ module.exports = {
   //result of voting session: strings 'yes','no',or 'tie'
   result: null,
 
-  // },
+
   //adds yes vote and checks for result
   voteYes: function () {
     //increment yes
@@ -45,8 +42,6 @@ module.exports = {
     if (this.yes + this.no === this.totalVotes) {
       //all votes are in!
       this.allVotesIn = true;
-      //change to state 3
-      this.stateView = 3;
       //check for a winner
       if (this.yes > this.no) {
         //set result
@@ -58,15 +53,16 @@ module.exports = {
         //set result
         this.result = 'tie';
       }
+      //change to state 3
+      this.changeStateView(3);
     }
   },
 
   setTotalVotes: function (num) {
     //set votes total
     this.totalVotes = num || 3;
-    //set state to 2
+    //set state to 2 using our method below to do so
     this.changeStateView(2);
-    // this.stateView = 2;
   },
 
   //reset the vote session
@@ -90,11 +86,11 @@ module.exports = {
     this.result = null;
   },
 
+  // change the stateView and emit it for the client to act upon
   changeStateView: function(viewnum) {
     // actually change the stateView on the object
     this.stateView = viewnum;
-    console.log("inside changeStateView");
-    // emit a socket event that the client is listening for
-    io.io.emit('news', this);
+    // emit a socket event that the client is listening for, and send it the entire data object here
+    server.io.emit('stateViewChange', this);
   }
 };
