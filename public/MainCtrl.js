@@ -1,5 +1,5 @@
 angular.module('MainCtrl', [])
-.controller('MainController', function($scope, Main, $interval, $location) {
+.controller('MainController', function($scope, Main, $interval, $location, $timeout) {
 
   // Possible voter object:
   $scope.dcydrObj = { 
@@ -32,31 +32,35 @@ angular.module('MainCtrl', [])
         'allVotesIn': state.data.allVotesIn,
         'result': state.data.result
       };
+      console.log('TEST IN LISTENER: ', $scope.dcydrObj);
+      //If stateView is 2 AND userVote is null
+      if ($scope.dcydrObj.stateView === 2 && $scope.userVote === null) {
+        //Change path to view2a
+        $timeout.cancel($scope.timeout);
+        $location.path('/view2a');
+      //If stateView is 2
+      // } else if ($scope.dcydrObj.stateView === 2) { //for testing..
+      // // } else if ($scope.dcydrObj.stateView === 2 && $scope.userVote !== null) {
+      //   //Change path to 2b
+      //   $location.path('/view2b');
+      }
+      //If allVotesIn is true
+      if ($scope.dcydrObj.result) {
+        $timeout.cancel($scope.timeout);
+
+        //make $scope.result show the result
+        $scope.result = $scope.dcydrObj.result;
+        //Change view to 3
+        $location.path('/view3'); 
+      }
+      $scope.timeout = $timeout($scope.listenToServer, 1000);
     });
-    console.log('TEST IN LISTENER: ', $scope.dcydrObj);
-    //If stateView is 2 AND userVote is null
-    if ($scope.dcydrObj.stateView === 2 && $scope.userVote === null) {
-      //Change path to view2a
-      $location.path('/view2a'); 
-    //If stateView is 2
-    } else if ($scope.dcydrObj.stateView === 2) { //for testing..
-    // } else if ($scope.dcydrObj.stateView === 2 && $scope.userVote !== null) {
-      //Change path to 2b
-      $location.path('/view2b');
-    }
-    //If allVotesIn is true
-    if ($scope.dcydrObj.result) {
-      //make $scope.result show the result
-      $scope.result = $scope.dcydrObj.result;
-      //Change view to 3
-      $location.path('/view3'); 
-    }
   };
 
 //++++++ This begins the listening cycle ++++++++++++++++++++++++
 //++++++ Un-comment to turn on ++++++++++++++++++++++++++++++++++
 //++++++ Call $scope.listenToServer on a setInterval of 500ms. +++++++++
-  $interval($scope.listenToServer, 1000);
+  $scope.timeout = $timeout($scope.listenToServer, 1000);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -120,7 +124,7 @@ angular.module('MainCtrl', [])
     Main.addVoteYes().
       catch(function (err) {
         console.log(err);
-      });
+      }).then($location.path('/view3'));
   };
 
   $scope.postVoteNo = function() {
@@ -128,7 +132,7 @@ angular.module('MainCtrl', [])
     Main.addVoteNo().
       catch(function (err) {
         console.log(err);
-      });
+      }).then($location.path('/view3'));
   };
 
 //---view2b------------------------------------------------------
