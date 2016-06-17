@@ -1,31 +1,7 @@
 angular.module('MainCtrl', [])
 .controller('MainController', function($scope, Main, $interval, $location, $timeout) {
 
-  $scope.viewToRouteConverter = {
-    2: '/view2a',
-    3: '/view3'
-  };
-  //Listen to any server side changes via the socket, and update $scope.dcydrObj accorgingly
-  Main.socket.on('news', function(data) {
-    console.log("data in socket.on(news) on CLIENT: ", data);
-    $scope.dcydrObj = {
-        'stateView': data.stateView,
-        'yes': data.yes,
-        'no': data.no,
-        'totalVotes': data.totalVotes,
-        'allVotesIn': data.allVotesIn,
-        'result': data.result
-      };
-    // change the route if appropriate
-    var rerouteTo = $scope.viewToRouteConverter[data.stateView];
-    console.log("rerouteTo: ", rerouteTo);
-    console.log("$location: ", $location);
-    $location.path(rerouteTo);
-    $scope.$apply();
-  });
-
-
-  // Possible voter object:
+  // Voter object set up:
   $scope.dcydrObj = { 
     stateView: 1,
     yes: 0,
@@ -40,10 +16,32 @@ angular.module('MainCtrl', [])
   //For displaying user's vote on view3
   $scope.userVote = null;
 
+  //---General functionality for listening to stateView and redirecting upon changes------
+  
+  //Listen to any server-side stateView changes via the socket, and update $scope.dcydrObj accorgingly
+  Main.socket.on('news', function(data) {
+    // Update the voter object to reflect the new data
+    $scope.dcydrObj = data;
+    // Change the route as appropriate
+    $scope.updateView(data.stateView);
+    // This line seems to be needed to make sure all clients update appropriately:
+    $scope.$apply();
+  });
 
-  //---General functionality for listening to stateView and resetting stateView------
+  // Object to convert the raw stateView number to the appropriate route
+  $scope.viewToRouteConverter = {
+    1: '/view1',
+    2: '/view2a',
+    3: '/view3'
+  };
 
-  //Listen to any server side changes and update $scope.dcydrObj accorgingly
+  // When we need to update the view
+  $scope.updateView = function(stateView) {
+    // Get the route from the route converter object
+    var rerouteTo = $scope.viewToRouteConverter[stateView];
+    // Set the location to be this route
+    $location.path(rerouteTo);
+  };
 
 
   //Reset stateView - visible on views 2a - 3
@@ -54,18 +52,20 @@ angular.module('MainCtrl', [])
       $scope.voters = 3;
       //Reset dcydr object to 
       $scope.dcydrObj = { 
-        voters: $scope.voters,
+        // voters: $scope.voters,
         stateView: 1,
         yes: 0,
         no: 0,
-        totalVotes: 0,
-        allVotesIn: false
+        totalVotes: $scope.voters,
+        allVotesIn: false,
+        result: null
       };
       //API call to reset state on server
       Main.resetState()
       .then(
         //Reset view to view1
-        $location.path('/view1'));
+        $scope.updateView(1)
+      );
     }
   };
 
@@ -89,7 +89,7 @@ angular.module('MainCtrl', [])
   };
 
   //Initiated when user hits 'go'.  take in number of votes from view1.  
-  //Once one user hits go, all users views will switch to v2a.  That is handled in $scope.listenToServer
+  //Once one user hits go, all users views will switch to v2a.  That is handled via sockets
   $scope.go = function() {
     Main.startVoting({'votes': $scope.voters}).
       catch(function (err) {
