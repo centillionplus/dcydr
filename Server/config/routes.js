@@ -11,7 +11,7 @@ module.exports = function(app) {
     })
     //set totalVotes
     .post(function(req, res) {
-      console.log(req.body);
+      console.log("body of post req: ", req.body);
       //parse number of voters
       var voters = parseInt(req.body.votes);
       voteSession.setTotalVotes(voters);

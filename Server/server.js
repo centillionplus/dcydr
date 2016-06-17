@@ -24,10 +24,11 @@ var io = socketio(server);
 // Set up the websocket
 // io.sockets.on('connection', function(socket) {
 io.on('connection', function(socket) {
-  socket.emit('news', {hello: 'world'});
+  // socket.emit('news', {hello: 'world'});
   socket.on('changeState', function(data) {
     console.log("data in socket.on(changeState) on SERVER: ", data);
   });
 });
 
 module.exports.app = app;
+module.exports.io = io;

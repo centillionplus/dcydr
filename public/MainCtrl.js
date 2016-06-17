@@ -13,10 +13,9 @@ angular.module('MainCtrl', [])
 
   //Set number of voters to a default of 3.  
   $scope.voters = 3;
-  //For displaying result on view3
-  // $scope.result = $scope.dcydrObj.result;
-  //For display on view2b
+  //For displaying user's vote on view3
   $scope.userVote = null;
+
 
   //---General functionality for listening to stateView and resetting stateView------
 
@@ -57,10 +56,10 @@ angular.module('MainCtrl', [])
     });
   };
 
-//++++++ This begins the listening cycle ++++++++++++++++++++++++
-//++++++ Un-comment to turn on ++++++++++++++++++++++++++++++++++
-//++++++ Call $scope.listenToServer on a setInterval of 500ms. +++++++++
-  $scope.timeout = $timeout($scope.listenToServer, 1000);
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// // Client no longer needs to listen to the server, as the server communicates directly via sockets.
+// // Old way we were having client listen regularly for changes (un-comment to turn on):
+// $scope.timeout = $timeout($scope.listenToServer, 1000);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 

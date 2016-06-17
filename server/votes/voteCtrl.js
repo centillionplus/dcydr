@@ -1,3 +1,5 @@
+var io = require('../server.js');
+
 //this contains and modifies the vote session obj
 module.exports = {
 
@@ -59,7 +61,8 @@ module.exports = {
     //set votes total
     this.totalVotes = num || 3;
     //set state to 2
-    this.stateView = 2;
+    this.changeStateView(num);
+    // this.stateView = 2;
   },
 
   //reset the vote session
@@ -81,5 +84,13 @@ module.exports = {
 
     //result of voting session: strings 'yes','no',or 'tie'
     this.result = null;
+  },
+
+  changeStateView: function(viewnum) {
+    // actually change the stateView on the object
+    this.stateView = viewnum;
+    console.log("inside changeStateView");
+    // emit a socket event that the client is listening for
+    io.io.emit('news', {'voters': viewnum});
   }
 };

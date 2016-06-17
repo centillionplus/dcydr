@@ -1,7 +1,7 @@
 var socket = io('http://localhost:3000');
 socket.on('news', function(data) {
     console.log("data in socket.on(news) on CLIENT: ", data);
-    socket.emit('changeState', { newestState: 'ruth' });
+    // socket.emit('changeState', { newestState: 'ruth' });
   });
 
 angular.module('MainService', [])
