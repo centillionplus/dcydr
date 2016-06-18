@@ -49,16 +49,15 @@ textarea:focus, input:focus{
 }
 
 
-.plus {
+.plusMinus {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   text-align: center;
   color: #663399;
   background-color: #eee;
-  font-size: 50px;
-/*  padding-top: 9px;
-  padding-left: 2px;*/
+  font-size: 33px;
+  font-weight: bold;
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -69,31 +68,7 @@ textarea:focus, input:focus{
   margin-bottom: 0px;
 }
 
-.plus:hover {
-    background-color: #663399;
-    color: #eee;
-}
-
-.minus {
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  text-align: center;
-  color: #663399;
-  background-color: #eee;
-  font-size: 50px;
-/*  padding-top: 9px;
-  padding-left: 2px;*/
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: block;
-  margin: auto;
-  border: 1px solid #663399;
-  margin-top: 0px;
-}
-
-.minus:hover {
+.plusMinus:hover {
     background-color: #663399;
     color: #eee;
 }
@@ -108,7 +83,8 @@ textarea:focus, input:focus{
   text-align: center;
   color: #663399;
   background-color: #eee;
-  font-size: 50px;
+  font-size: 33px;
+  font-weight: bold;
   padding-top: 15px;
   padding-bottom: 15px;
   border-radius: 55px;
@@ -128,9 +104,8 @@ textarea:focus, input:focus{
   text-align: center;
   color: #663399;
   background-color: #eee;
-  font-size: 50px;
-/*  padding-top: 35px;
-  padding-left: 2px;*/
+  font-size: 33px;
+  font-weight: bold;
   width: 150px;
   height: 150px;
   border-radius: 75px;
@@ -218,15 +193,11 @@ textarea:focus, input:focus{
 
 .space {
   text-align: center;
-  font-style: italic;
-  color: #663399;
   padding-top: 45px;
 }
 
 .space2 {
   text-align: center;
-  font-style: italic;
-  color: #663399;
   padding-top: 15px;
 }
   
