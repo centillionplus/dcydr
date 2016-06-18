@@ -11,10 +11,11 @@ module.exports = function(app) {
     })
     //set totalVotes
     .post(function(req, res) {
-      console.log(req.body);
       //parse number of voters
-      var voters = parseInt(req.body.votes);
-      voteSession.setTotalVotes(voters);
+      var totalVotes = parseInt(req.body.votes);
+      // Send the number of total votes to our method in voteCtrl to handle all that needs to happen
+      voteSession.setTotalVotes(totalVotes);
+      // Send back our whole data object
       res.send(201, voteSession);
     });
 

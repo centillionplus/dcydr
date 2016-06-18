@@ -2,7 +2,11 @@ angular.module('MainService', [])
 .factory('Main', ['$http', function($http) {
 
   return {
-    //call to get state - on setInterval?
+
+    // create the socket variable to be used to emit and listen in the controller
+    socket: io('http://localhost:3000'),
+
+    //call to get state
     getState: function() {
       return $http.get('/api/vote');
     },
