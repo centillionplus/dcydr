@@ -1,10 +1,24 @@
 angular.module('MainService', [])
-.factory('Main', ['$http', function($http) {
+.factory('Main', ['$http', '$location', function($http, $location) {
 
   return {
 
     // create the socket variable to be used to emit and listen in the controller
     socket: io('http://localhost:3000'),
+
+    viewToRouteConverter: {
+      1: '/view1',
+      2: '/view2a',
+      3: '/view3'
+    },
+
+    // When we need to update the view
+    updateView: function(stateView) {
+      // Get the route from the route converter object
+      var rerouteTo = this.viewToRouteConverter[stateView];
+      // Set the location to be this route
+      $location.path(rerouteTo);
+    },
 
     //call to get state
     getState: function() {
@@ -34,20 +48,21 @@ angular.module('MainService', [])
       });
     },
 
-
     //Cancel/Reset - not sure if this sends an actual reset vote object, or a message for server to reset the object
     resetState: function() {
       //returns a reset voteData object
       return $http.post('api/vote/reset/');
     },
 
-
-
     // Don't think we need a delete just yet.  But just in case...
     delete: function() {
       return $http.delete('/api/vote/');
     }
-
   };       
+}])
 
-}]);
+.run(function(Main, $location) {
+  Main.getState().then(function (state) {
+    Main.updateView(state.data.stateView);
+  });
+});
