@@ -4,23 +4,19 @@ angular.module('appRoutes', [])
   $routeProvider
   
   .when('/view1', {
-    templateUrl: 'views/view1.html',
-    controller: 'MainController'
+    templateUrl: 'views/view1.html'
   })
 
   .when('/view2a', {
-    templateUrl: 'views/view2a.html',
-    controller: 'MainController'
+    templateUrl: 'views/view2a.html'
   })
 
   .when('/view2b', {
-    templateUrl: 'views/view2b.html',
-    controller: 'MainController'
+    templateUrl: 'views/view2b.html'
   })
 
   .when('/view3', {
-    templateUrl: 'views/view3.html',
-    controller: 'MainController'
+    templateUrl: 'views/view3.html'
   })
 
   .otherwise({
