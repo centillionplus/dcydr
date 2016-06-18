@@ -50,4 +50,21 @@ angular.module('MainService', [])
 
   };       
 
-}]);
+}])
+    //<START-------------------MAKE SURE VIEW IS CORRECT ON LOAD---------------->
+.run(function(Main, $location) {
+  Main.getState().then(function(state) {
+      var viewToRouteConverter = {
+      1: '/view1',
+      2: '/view2a',
+      3: '/view3'
+    };
+    var rerouteTo = viewToRouteConverter[state.data.stateView];
+    // Set the location to be this route
+    $location.path(rerouteTo);
+
+  });
+});
+
+    //<END-------------------MAKE SURE VIEW IS CORRECT ON LOAD------------------>
+
