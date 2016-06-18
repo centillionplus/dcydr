@@ -1,8 +1,13 @@
 <div class="jumbotron text-center">
 
-  <h3>And the group votes...</h3>
+  <div class="yourVoteHead">You voted</div>
+  <h3 class="yourVote">yes</h3>
+  <!-- <div class="yourVote">{{ userVote }}</div> -->
+
+
+  <div class="groupVoteHead">The group votes...</div>
   <div class="result">{{ result }}</div>
 
-  <div class="reset" ng-click="reset()">Reset Voting Session</div>
+  <button class="reset" ng-click="reset()">Reset Voting Session</button>
 
 </div>
