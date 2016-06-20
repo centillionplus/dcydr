@@ -48,7 +48,7 @@ angular.module('MainService', [])
       });
     },
 
-    //Cancel/Reset - not sure if this sends an actual reset vote object, or a message for server to reset the object
+    //Cancel/Reset - sends a message for server to reset the object
     resetState: function() {
       //returns a reset voteData object
       return $http.post('api/vote/reset/');
