@@ -9,7 +9,7 @@ var app = express();
 //SET UP MIDDLEWARE + ROUTES
 middleware(app, express);
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Save the HTTP server created with express as a variable in order to reuse for socket.io
 var server = app.listen(PORT);
