@@ -4,7 +4,7 @@ angular.module('MainService', [])
   return {
 
     // create the socket variable to be used to emit and listen in the controller
-    socket: io('http://localhost:3000'),
+    socket: io('https://dcydr.herokuapp.com'),
 
     viewToRouteConverter: {
       1: '/view1',
