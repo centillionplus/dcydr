@@ -5,10 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "postinstall": "bower install"
   },
   "engines": {
-    "node": "4.4.5"
+    "node": "4.4.5",
+    "npm" : 
   },
   "repository": {
     "type": "git",
