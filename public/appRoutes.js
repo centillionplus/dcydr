@@ -24,7 +24,9 @@ angular.module('appRoutes', [])
   });
 
   $locationProvider.html5Mode({
-    enabled: true,
+    // uncommenting the line below would cosmetically make the urls look nicer in the browser without showing the "/#" in each route. However, it causes refresh not to work.
+    // enabled: true,
+    // This line was added because we seemed to be getting an error without it
     requireBase: false
   });
 
