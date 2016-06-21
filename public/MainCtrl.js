@@ -58,7 +58,7 @@ angular.module('MainCtrl', [])
 
 //---view2------------------------------------------------------
 
-  //Take user vote input and post to server - called when user clicks Y/N on view2a.html
+  //Take user vote input and post to server - called when user clicks Y/N on view2.html
   $scope.postVoteYes = function() {
     $scope.userVote = 'yes';
     Main.addVoteYes().
