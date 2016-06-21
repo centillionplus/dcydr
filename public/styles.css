@@ -50,8 +50,8 @@ textarea:focus, input:focus{
 
 
 .plusMinus {
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+/*  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;*/
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   text-align: center;
   color: #663399;
@@ -68,10 +68,19 @@ textarea:focus, input:focus{
   margin-bottom: 0px;
 }
 
-.plusMinus:hover {
+
+.plusMinus:active {
+  background-color: #663399;
+  color: #eee;
+  transform: translateY(0px);
+}
+
+
+/*Hover does not work well with mobile*/
+/*.plusMinus:hover {
     background-color: #663399;
     color: #eee;
-}
+}*/
 
 .go {
   -webkit-transition-duration: 0.4s;
@@ -98,8 +107,8 @@ textarea:focus, input:focus{
 }
 
 .vote {
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+/*  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;*/
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   text-align: center;
   color: #663399;
@@ -116,14 +125,20 @@ textarea:focus, input:focus{
   margin-bottom: 40px;
 }
 
-.vote:hover {
-    background-color: #663399;
-    color: #eee;
+.plusMinus:active {
+  background-color: #663399;
+  color: #eee;
+  transform: translateY(0px);
 }
 
+/*.vote:hover {
+    background-color: #663399;
+    color: #eee;
+}*/
+
 .reset {  
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+/*  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;*/
   display: block;
   margin: auto;
   width: 175px;
@@ -137,10 +152,16 @@ textarea:focus, input:focus{
   margin-bottom: 20px;
 }
 
-.reset:hover {
+.reset:active {
+  background-color: #663399;
+  color: #eee;
+  transform: translateY(0px);
+}
+
+/*.reset:hover {
     background-color: #663399;
     color: #eee;
-}
+}*/
 
 .yourVoteHead { 
   text-align: center;
