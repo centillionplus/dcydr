@@ -7,12 +7,8 @@ angular.module('appRoutes', [])
     templateUrl: 'views/view1.html'
   })
 
-  .when('/view2a', {
-    templateUrl: 'views/view2a.html'
-  })
-
-  .when('/view2b', {
-    templateUrl: 'views/view2b.html'
+  .when('/view2', {
+    templateUrl: 'views/view2.html'
   })
 
   .when('/view3', {
