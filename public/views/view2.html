@@ -3,5 +3,5 @@
   <button class="vote" ng-click="postVoteYes()">Yes</button>
   <button class="vote" ng-click="postVoteNo()">No</button>
 
-  <button class="reset" ng-click="reset()">Reset Voting Session</button>
+  <button class="reset" ng-click="reset()" ng-show="voteStarter">Reset Voting Session</button>
 </div>

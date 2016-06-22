@@ -16,6 +16,9 @@ angular.module('MainCtrl', [])
   //For displaying user's vote on view3
   $scope.userVote = null;
 
+  //For stting which client started the vote
+  $scope.voteStarter = false;
+
   
   //Listen to any server-side stateView changes via the socket, and update $scope.dcydrObj accorgingly
   Main.socket.on('stateViewChange', function(data) {
@@ -53,6 +56,9 @@ angular.module('MainCtrl', [])
     Main.startVoting({'votes': $scope.dcydrObj.totalVotes}).
       catch(function (err) {
         console.log(err);
+      }).then(function(){
+        //make this client the vote starter
+        $scope.voteStarter = true;
       });
   };
 
@@ -81,6 +87,8 @@ angular.module('MainCtrl', [])
     if (confirm('Are you sure you want to reset?')) {
       //Reset dcydr object to defaults (copy the object so the two are not connected)
       $scope.dcydrObj = JSON.parse($scope.dcydrObjDefaults);
+      //reset voteStarter
+      $scope.voteStarter = false;
       //API call to reset state on server
       Main.resetState()
       .then(
