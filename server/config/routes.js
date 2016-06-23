@@ -1,4 +1,4 @@
-// var http = require('./config/http.js');
+//vote session obj and methods
 var voteSession = require('../votes/voteCtrl.js');
 
 module.exports = function(app) {

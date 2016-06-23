@@ -66,7 +66,8 @@ angular.module('MainService', [])
   };       
 }])
 
-.run(function(Main, $location) {
+//Get the state and update the view on first page load
+.run(function(Main) {
   Main.getState().then(function (state) {
     Main.updateView(state.data.stateView);
   });
