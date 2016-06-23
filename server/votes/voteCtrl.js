@@ -44,16 +44,16 @@ module.exports = {
       this.allVotesIn = true;
       //check for a winner
       if (this.yes > this.no) {
-        //set result
+        //set result - yes
         this.result = 'yes';
       } else if (this.yes < this.no) {
-        //set result
+        //set result - no
         this.result = 'no';
       } else {
-        //set result
+        //set result - tie
         this.result = 'tie';
       }
-      //change to state 3
+      //change to state 3 and emit stateViewChange to all clients
       this.changeStateView(3);
     }
   },
@@ -61,7 +61,7 @@ module.exports = {
   setTotalVotes: function (num) {
     //set votes total
     this.totalVotes = num || 3;
-    //set state to 2 using our method below to do so
+    //set state to 2 using our method below to do so and emit stateViewChange to all clients
     this.changeStateView(2);
   },
 
