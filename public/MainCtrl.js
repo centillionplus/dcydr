@@ -18,11 +18,11 @@ angular.module('MainCtrl', [])
   // For displaying user's vote on view3. (Note: we didn't put it in the voter object as a property because it is not on the server's data object)
   $scope.userVote = null;
 
-  //For stting which client started the vote
+  // For stting which client started the vote
   $scope.voteStarter = false;
 
   
-  //Listen to any server-side stateView changes via the socket, and update $scope.dcydrObj accorgingly
+  // Listen to any server-side stateView changes via the socket, and update $scope.dcydrObj accorgingly
   Main.socket.on('stateViewChange', function(data) {
     // Update the voter object to reflect the new data
     $scope.dcydrObj = data;
@@ -37,7 +37,7 @@ angular.module('MainCtrl', [])
 
   // When '+' is clicked on view 1, $scope.dcydrObj.totalVotes is incremented  
   $scope.incNumOfVoters = function() {
-    //Set max number of voters to 15 for now.  This may change..
+    // Set max number of voters to 15 for now.  This may change..
     if ($scope.dcydrObj.totalVotes < 15) {
       $scope.dcydrObj.totalVotes += 1;
     }
@@ -51,7 +51,7 @@ angular.module('MainCtrl', [])
     }
   };
 
-  // Initiated when user hits 'Start!'. Takes in number of votes from view 1  
+  // Initiated when user hits 'Start!'. Takes in number of votes from view 1rser  
   // Sends POST request to update the server
   // (causes all users views will switch to view 2, handled via sockets)
   $scope.go = function() {
@@ -85,16 +85,16 @@ angular.module('MainCtrl', [])
 
   // Reset stateView - visible on view 3 for everyone, and also 2 for the organizer (whoever pressed Start)
   $scope.reset = function() {
-    //Confirm pop-up
+    // Confirm pop-up
     if (confirm('Are you sure you want to reset?')) {
-      //Reset dcydr object to defaults (copy the defaults object so the two are not connected)
+      // Reset dcydr object to defaults (copy the defaults object so the two are not connected)
       $scope.dcydrObj = JSON.parse($scope.dcydrObjDefaults);
-      //reset voteStarter
+      // Reset voteStarter
       $scope.voteStarter = false;
-      //API call to reset state on server
+      // API call to reset state on server
       Main.resetState()
       .then(
-        //Reset view to view1
+        // Reset view to view1
         Main.updateView(1)
       );
     }
