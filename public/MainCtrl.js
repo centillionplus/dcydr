@@ -1,6 +1,7 @@
 angular.module('MainCtrl', [])
 .controller('MainController', function($scope, Main, $interval, $location) {
 
+  // Stringified defaults obj to copy with JSON parse whenever we need to reset the voter object to defaults
   $scope.dcydrObjDefaults = JSON.stringify({ 
     stateView: 1,
     yes: 0,
@@ -10,10 +11,11 @@ angular.module('MainCtrl', [])
     result: null
   });
 
-  // Voter object default initial set up (copy the object so the two are not connected):
+  // The voter object $scope.dcydrObj tracks all the data we need to know, mimics the object the server stores
+  // Voter object set initially to defaults (copying the defaults object so the two are not connected):
   $scope.dcydrObj = JSON.parse($scope.dcydrObjDefaults);
 
-  //For displaying user's vote on view3
+  // For displaying user's vote on view3. (Note: we didn't put it in the voter object as a property because it is not on the server's data object)
   $scope.userVote = null;
 
   //For stting which client started the vote
@@ -33,7 +35,7 @@ angular.module('MainCtrl', [])
 
 //---view1-------------------------------------------------------
 
-  //When '+' is clicked on view1, $scope.dcydrObj.totalVotes is changed accordingly  
+  // When '+' is clicked on view 1, $scope.dcydrObj.totalVotes is incremented  
   $scope.incNumOfVoters = function() {
     //Set max number of voters to 15 for now.  This may change..
     if ($scope.dcydrObj.totalVotes < 15) {
@@ -41,17 +43,17 @@ angular.module('MainCtrl', [])
     }
   };
 
-  //When '-' is clicked on view1, $scope.dcydrObj.totalVotes is changed accordingly  
+  // When '-' is clicked on view 1, $scope.dcydrObj.totalVotes is decremented  
   $scope.decNumOfVoters = function() {
-    //Min number of voters is 1 - for now..
-    if ($scope.dcydrObj.totalVotes > 1) {
+    // Min number of voters is 2 (maybe could be 3?)
+    if ($scope.dcydrObj.totalVotes > 2) {
       $scope.dcydrObj.totalVotes -= 1;
     }
   };
 
-  //Initiated when user hits 'Start!'.  take in number of votes from view1.  
+  // Initiated when user hits 'Start!'. Takes in number of votes from view 1  
   // Sends POST request to update the server
-  // (causes all users views will switch to v2a, handled via sockets)
+  // (causes all users views will switch to view 2, handled via sockets)
   $scope.go = function() {
     Main.startVoting({'votes': $scope.dcydrObj.totalVotes}).
       catch(function (err) {
@@ -64,7 +66,7 @@ angular.module('MainCtrl', [])
 
 //---view2------------------------------------------------------
 
-  //Take user vote input and post to server - called when user clicks Y/N on view2.html
+  // Takes user vote input and post to server - called when user clicks Y/N on view 2
   $scope.postVoteYes = function() {
     $scope.userVote = 'yes';
     Main.addVoteYes().
@@ -81,11 +83,11 @@ angular.module('MainCtrl', [])
       }).then($location.path('/view3'));
   };
 
-  //Reset stateView - visible on views 2 and 3
+  // Reset stateView - visible on view 3 for everyone, and also 2 for the organizer (whoever pressed Start)
   $scope.reset = function() {
     //Confirm pop-up
     if (confirm('Are you sure you want to reset?')) {
-      //Reset dcydr object to defaults (copy the object so the two are not connected)
+      //Reset dcydr object to defaults (copy the defaults object so the two are not connected)
       $scope.dcydrObj = JSON.parse($scope.dcydrObjDefaults);
       //reset voteStarter
       $scope.voteStarter = false;
